@@ -70,7 +70,7 @@ document.getElementById('app').innerHTML = `
     </div>
     <div class="btn-row">
       <button class="btn btn-primary hide" id="retryBtn">もう一度挑戦する</button>
-      <a class="btn btn-ghost hide" id="homeBtn" href="index.html">テスト一覧へ戻る</a>
+      <button class="btn btn-ghost hide" id="homeBtn">テスト一覧へ戻る</button>
     </div>
     <p class="foot" id="recordNote"></p>
   </div>
@@ -102,6 +102,7 @@ $("name").addEventListener("input", e => {
 $("startBtn").addEventListener("click", startQuiz);
 $("nextBtn").addEventListener("click", goNext);
 $("retryBtn").addEventListener("click", () => { startQuiz(); });
+$("homeBtn").addEventListener("click", () => { window.location.href = "index.html"; });
 
 function startQuiz(){
   cur = 0; picks = new Array(total).fill(null); attempt++;
