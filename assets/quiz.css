@@ -38,6 +38,9 @@
   .wrap{width:100%;max-width:660px}
 
   .masthead{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px;padding:2px 2px 0}
+  .masthead .home-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;border-radius:12px;transition:opacity .15s}
+  .masthead .home-link:hover{opacity:.75}
+  .masthead .home-link:focus-visible{outline:3px solid #F7BC83;outline-offset:3px}
   .masthead .logo{height:46px;width:auto;display:block}
   .wordmark{display:flex;flex-direction:column;justify-content:center;gap:3px}
   .wordmark .wm-mark{display:none}
@@ -99,6 +102,7 @@
     font:inherit;font-family:"Zen Maru Gothic";font-weight:700;font-size:16px;
     border:none;border-radius:14px;padding:15px 22px;cursor:pointer;
     transition:transform .12s,box-shadow .2s,background .2s;width:100%;
+    display:block;text-align:center;text-decoration:none;  /* <a>もボタン表示に */
   }
   .btn-primary{background:var(--coral);color:#fff;box-shadow:0 10px 24px -10px var(--coral)}
   .btn-primary:hover{background:var(--coral-dk);transform:translateY(-1px)}

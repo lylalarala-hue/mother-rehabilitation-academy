@@ -10,13 +10,15 @@ const QUESTIONS = window.QUIZ.questions;
 /* ページ全体を描画（旧 quiz-day1.html の <body> と同一マークアップ） */
 document.getElementById('app').innerHTML = `
   <div class="masthead">
-    <img class="logo" src="assets/logo.png" alt="産前産後リハビリアカデミー" alt="産前産後リハビリアカデミー"
-         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-    <div class="wordmark">
-      <span class="wm-mark">産</span>
-      <span class="wm-text">産前産後リハビリアカデミー</span>
-      <span class="wm-sub">Perinatal &amp; Postnatal Rehabilitation Academy</span>
-    </div>
+    <a class="home-link" href="index.html" aria-label="テスト一覧（ホーム）へ戻る">
+      <img class="logo" src="assets/logo.png" alt="産前産後リハビリアカデミー"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="wordmark">
+        <span class="wm-mark">産</span>
+        <span class="wm-text">産前産後リハビリアカデミー</span>
+        <span class="wm-sub">Perinatal &amp; Postnatal Rehabilitation Academy</span>
+      </div>
+    </a>
     <span class="pill">確認テスト</span>
   </div>
 
@@ -24,7 +26,7 @@ document.getElementById('app').innerHTML = `
   <div class="card" id="start">
     <div class="eyebrow" id="dayLabel"></div>
     <h1 id="dayTitle"></h1>
-    <p class="lead">オンライン座学の内容を確認するテストです。合格すると、対面ハンズオンへの参加準備が整います。落ち着いて取り組んでください。</p>
+    <p class="lead">オンライン座学の内容の理解度を確認するテストです。対面ハンズオン受講までに、合格してください。何度でも挑戦できますので、しっかり取り組んでください。</p>
     <ul class="rules">
       <li><span class="ic">問</span><span><b id="qnum"></b>問の選択式です（所要 約5〜8分）</span></li>
       <li><span class="ic">%</span><span>合格ラインは <b id="passLabel"></b>。<b>合格するまで何度でも</b>再受験できます</span></li>
@@ -67,7 +69,8 @@ document.getElementById('app').innerHTML = `
       <div id="reviewList"></div>
     </div>
     <div class="btn-row">
-      <button class="btn btn-ghost hide" id="retryBtn">もう一度挑戦する</button>
+      <button class="btn btn-primary hide" id="retryBtn">もう一度挑戦する</button>
+      <a class="btn btn-ghost hide" id="homeBtn" href="index.html">テスト一覧へ戻る</a>
     </div>
     <p class="foot" id="recordNote"></p>
   </div>
@@ -163,12 +166,14 @@ function finish(){
     b.className = "banner pass";
     b.innerHTML = "<b>"+userName+" さん、合格です。</b><br>この内容の理解が確認できました。ハンズオン（対面実技）の準備が整っています。下記の解説で総復習しておきましょう。";
     $("retryBtn").classList.add("hide");
+    $("homeBtn").className = "btn btn-primary";   // 合格：一覧へ戻るが主アクション
   }else{
     v.textContent = "もう少し"; v.className = "verdict fail";
     $("vsub").textContent = "合格まで あと " + (passNeed - correct) + " 問です。";
     b.className = "banner fail";
     b.innerHTML = "<b>"+userName+" さん、惜しい！</b><br>下の解説でつまずいた箇所を確認し、もう一度挑戦してください。<b>回数制限はありません</b>。理解の定着が目的です。";
-    $("retryBtn").classList.remove("hide");
+    $("retryBtn").classList.remove("hide");        // 不合格：再挑戦が主
+    $("homeBtn").className = "btn btn-ghost";       // 一覧へ戻るは副
   }
 
   buildReview();
