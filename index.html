@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>確認テスト 一覧｜産前産後リハビリアカデミー</title>
+<meta name="description" content="産前産後リハビリテーションアカデミーのオンライン確認テスト一覧。各回の座学のあと、確認テストで理解度をチェックします。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     トップページ（確認テスト 一覧）
+     ── 配色・フォントは quiz-day1.html と完全に統一しています。
+        ブランドカラーを変えたいときは下の :root を、テスト本体と
+        同じ値に揃えてください。
+     ============================================================ */
+  :root{
+    --cream:#FCF6EE;
+    --paper:#FFFFFF;
+    --ink:#3B322B;
+    --ink-soft:#9A897A;
+    --line:#F1E6D8;
+    --coral:#EE934E;       /* メイン強調＝HPのオレンジ */
+    --coral-dk:#D2701F;
+    --sage:#84B58E;
+    --clay:#E0907F;
+    --shadow:0 18px 48px -20px rgba(120,80,40,.30);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Zen Kaku Gothic New",system-ui,sans-serif;
+    background:
+      radial-gradient(120% 80% at 12% -10%, #FBE3CD 0%, transparent 55%),
+      radial-gradient(110% 70% at 100% 0%, #FDEFDF 0%, transparent 50%),
+      var(--cream);
+    color:var(--ink);
+    line-height:1.75;
+    min-height:100%;
+    display:flex;
+    justify-content:center;
+    padding:28px 16px 60px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{width:100%;max-width:660px}
+
+  /* ── ヘッダー（テスト本体と共通） ── */
+  .masthead{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px;padding:2px 2px 0}
+  .masthead .logo{height:46px;width:auto;display:block}
+  .wordmark{display:flex;flex-direction:column;justify-content:center;gap:3px}
+  .wordmark .wm-text{font-family:"Zen Maru Gothic";font-weight:700;font-size:18px;line-height:1.2;color:var(--ink);letter-spacing:.02em}
+  .wordmark .wm-sub{font-family:"Zen Kaku Gothic New";font-weight:400;font-size:11px;line-height:1.3;color:var(--ink);letter-spacing:.03em}
+  .masthead .pill{
+    margin-left:auto;font-size:11px;letter-spacing:.16em;color:var(--coral-dk);
+    background:#FDEAD8;padding:6px 12px;border-radius:999px;font-weight:700;white-space:nowrap;
+  }
+  .sitefoot{text-align:center;margin-top:26px;font-size:11px;color:#9A8B7B;line-height:1.95}
+  .sitefoot .org{color:var(--ink-soft);font-weight:500}
+
+  /* ── カード（テスト本体と共通） ── */
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:27px;
+    padding:36px 30px;
+    box-shadow:var(--shadow);
+    animation:rise .6s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  .eyebrow{
+    display:inline-block;font-family:"Zen Maru Gothic";font-weight:700;color:#fff;
+    background:linear-gradient(135deg,var(--coral),#F7BC83);
+    font-size:12.5px;letter-spacing:.1em;margin-bottom:13px;
+    padding:5px 15px;border-radius:999px;box-shadow:0 7px 15px -7px var(--coral);
+  }
+  h1{
+    font-family:"Zen Maru Gothic";font-weight:900;
+    font-size:27px;line-height:1.35;letter-spacing:.01em;margin-bottom:14px;
+  }
+  .lead{color:var(--ink-soft);font-size:15px;margin-bottom:20px}
+
+  /* ── 受講の流れ（細いストリップ） ── */
+  .flow{
+    display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    font-size:12.5px;color:var(--ink-soft);
+    background:var(--cream);border:1px solid var(--line);
+    border-radius:14px;padding:12px 15px;margin-bottom:26px;
+  }
+  .flow .step{display:flex;align-items:center;gap:7px}
+  .flow .n{
+    flex:none;width:20px;height:20px;border-radius:50%;background:#FDEAD8;color:var(--coral-dk);
+    display:grid;place-items:center;font-family:"Zen Maru Gothic";font-weight:700;font-size:11px;
+  }
+  .flow b{color:var(--ink);font-weight:700}
+  .flow .arrow{color:var(--coral);font-weight:700}
+
+  /* ── DAY 選択ボタン ── */
+  .days{list-style:none;display:grid;gap:14px}
+  .day{
+    display:flex;align-items:center;gap:16px;
+    border:1.5px solid var(--line);border-radius:18px;
+    padding:17px 18px;background:#fff;text-decoration:none;color:inherit;
+    transition:border-color .15s,box-shadow .2s,transform .12s,background .15s;
+  }
+  .day-num{
+    flex:none;width:54px;height:54px;border-radius:16px;
+    display:grid;place-items:center;line-height:1;text-align:center;
+    font-family:"Zen Maru Gothic";font-weight:900;font-size:19px;
+  }
+  .day-num small{display:block;font-size:9px;letter-spacing:.14em;font-weight:700;margin-bottom:2px;opacity:.9}
+  .day-body{flex:1;min-width:0}
+  .day-title{display:block;font-family:"Zen Maru Gothic";font-weight:700;font-size:17px;line-height:1.4}
+  .day-desc{display:block;font-size:13px;color:var(--ink-soft);margin-top:3px}
+  .day-cta{flex:none;display:flex;align-items:center;gap:6px;font-family:"Zen Maru Gothic";font-weight:700;font-size:13.5px;white-space:nowrap}
+  .day-cta .arrow{transition:transform .15s}
+
+  /* 受験可能 */
+  .day.is-open{cursor:pointer}
+  .day.is-open .day-num{
+    background:linear-gradient(135deg,var(--coral),#F7BC83);color:#fff;
+    box-shadow:0 9px 20px -9px var(--coral);
+  }
+  .day.is-open .day-cta{color:var(--coral-dk)}
+  .day.is-open:hover{border-color:var(--coral);background:#FFF8F1;transform:translateY(-2px);box-shadow:var(--shadow)}
+  .day.is-open:hover .arrow{transform:translateX(4px)}
+  .day.is-open:focus-visible{outline:3px solid #F7BC83;outline-offset:2px}
+
+  /* 準備中 */
+  .day.is-soon{background:var(--cream);border-style:dashed;cursor:not-allowed}
+  .day.is-soon .day-num{background:#EFE6DA;color:var(--ink-soft)}
+  .day.is-soon .day-title{color:var(--ink-soft)}
+  .soon-badge{
+    flex:none;font-size:11.5px;font-weight:700;color:var(--ink-soft);
+    background:#EFE6DA;padding:6px 12px;border-radius:999px;letter-spacing:.04em;white-space:nowrap;
+  }
+
+  .note{font-size:12.5px;color:var(--ink-soft);margin-top:22px;line-height:1.85;
+        border-top:1px solid var(--line);padding-top:18px}
+  .note b{color:var(--coral-dk)}
+
+  @media (max-width:420px){
+    .card{padding:28px 20px}
+    .day{padding:15px 14px;gap:13px}
+    .day-num{width:48px;height:48px}
+    .day-cta .label{display:none}  /* 狭い画面では矢印のみ */
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <img class="logo" src="assets/logo.png" alt="産前産後リハビリアカデミー"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="wordmark">
+      <span class="wm-text">産前産後リハビリアカデミー</span>
+      <span class="wm-sub">Perinatal &amp; Postnatal Rehabilitation Academy</span>
+    </div>
+    <span class="pill">確認テスト</span>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">受講者ページ</div>
+    <h1>確認テスト 一覧</h1>
+    <p class="lead">各回のオンライン座学を視聴したあと、この確認テストで理解度をチェックします。合格すると、対面ハンズオンへの参加準備が整います。受ける回を選んでください。</p>
+
+    <div class="flow">
+      <span class="step"><span class="n">1</span><b>オンライン座学</b></span>
+      <span class="arrow">→</span>
+      <span class="step"><span class="n">2</span><b>確認テスト（合格）</b></span>
+      <span class="arrow">→</span>
+      <span class="step"><span class="n">3</span><b>対面ハンズオン</b></span>
+    </div>
+
+    <ul class="days">
+      <!-- DAY 1：公開中 -->
+      <li>
+        <a class="day is-open" href="day1.html">
+          <span class="day-num"><small>DAY</small>1</span>
+          <span class="day-body">
+            <span class="day-title">産前産後の基礎と評価</span>
+            <span class="day-desc">基礎・姿勢・リスク管理・評価（全10問）</span>
+          </span>
+          <span class="day-cta"><span class="label">テストを受ける</span> <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <!-- DAY 2〜4：準備中（公開時に下記コメントの手順で有効化） -->
+      <li>
+        <div class="day is-soon" aria-disabled="true">
+          <span class="day-num"><small>DAY</small>2</span>
+          <span class="day-body">
+            <span class="day-title">準備中</span>
+            <span class="day-desc">近日公開予定です</span>
+          </span>
+          <span class="soon-badge">準備中</span>
+        </div>
+      </li>
+      <li>
+        <div class="day is-soon" aria-disabled="true">
+          <span class="day-num"><small>DAY</small>3</span>
+          <span class="day-body">
+            <span class="day-title">準備中</span>
+            <span class="day-desc">近日公開予定です</span>
+          </span>
+          <span class="soon-badge">準備中</span>
+        </div>
+      </li>
+      <li>
+        <div class="day is-soon" aria-disabled="true">
+          <span class="day-num"><small>DAY</small>4</span>
+          <span class="day-body">
+            <span class="day-title">準備中</span>
+            <span class="day-desc">近日公開予定です</span>
+          </span>
+          <span class="soon-badge">準備中</span>
+        </div>
+      </li>
+    </ul>
+
+    <p class="note">
+      ※ お名前は、<b>お申し込み時と同じ表記</b>でご入力ください（結果の照合に使用します）。<br>
+      ※ 合格するまで<b>何度でも</b>受験できます。理解の定着が目的です。
+    </p>
+  </div>
+
+  <div class="sitefoot">
+    <span class="org">主催 マザーヘルス協会　／　共催 ENCOUNTER　／　後援 想千グループ</span><br>
+    © 産前産後リハビリアカデミー
+  </div>
+</div>
+
+<!-- ============================================================
+     DAY2〜4 を公開するときの手順（このファイルの編集はこれだけ）
+     1. 該当の <li> 内を、DAY1 と同じ「is-open」リンク型に書き換える：
+        <a class="day is-open" href="day2.html"> ... </a>
+     2. day-title / day-desc を、その回の内容に変更
+     3. soon-badge の行を削除し、代わりに DAY1 と同じ
+        <span class="day-cta"><span class="label">テストを受ける</span> <span class="arrow">→</span></span>
+        を入れる
+     ============================================================ -->
+</body>
+</html>
