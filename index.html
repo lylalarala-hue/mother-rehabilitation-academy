@@ -5,81 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>確認テスト 一覧｜産前産後リハビリアカデミー</title>
 <meta name="description" content="産前産後リハビリテーションアカデミーのオンライン確認テスト一覧。各回の座学のあと、確認テストで理解度をチェックします。" />
+
+<!-- LINE 等で URL を共有したときに出るプレビューカード（OGP）。設定済み。
+     ※ リポジトリ名や URL を変えた場合だけ、下の 2 か所を書き換えてください。 -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="確認テスト 一覧｜産前産後リハビリアカデミー" />
+<meta property="og:description" content="各回のオンライン座学のあと、確認テストで理解度をチェックします。" />
+<meta property="og:url" content="https://lylalarala-hue.github.io/mother-rehabilitation-academy/" />
+<meta property="og:image" content="https://lylalarala-hue.github.io/mother-rehabilitation-academy/assets/logo.png" />
+<link rel="icon" type="image/png" href="assets/logo.png" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+
+<!-- 共通デザイン（ブランドカラー・ヘッダー・カードなど）はテスト本体と同じ
+     assets/quiz.css を使用。色を変えたいときは quiz.css の :root を
+     1 か所直すだけで、このページにも全 DAY にも反映されます。 -->
+<link rel="stylesheet" href="assets/quiz.css">
+
 <style>
   /* ============================================================
-     トップページ（確認テスト 一覧）
-     ── 配色・フォントは quiz-day1.html と完全に統一しています。
-        ブランドカラーを変えたいときは下の :root を、テスト本体と
-        同じ値に揃えてください。
+     このページ（確認テスト 一覧）専用のスタイル
+     ── 共通部分（配色・フォント・ヘッダー・カード）は assets/quiz.css
+        が担当。ここにあるのは「受講の流れ」と「DAY 選択ボタン」だけ。
      ============================================================ */
-  :root{
-    --cream:#FCF6EE;
-    --paper:#FFFFFF;
-    --ink:#3B322B;
-    --ink-soft:#9A897A;
-    --line:#F1E6D8;
-    --coral:#EE934E;       /* メイン強調＝HPのオレンジ */
-    --coral-dk:#D2701F;
-    --sage:#84B58E;
-    --clay:#E0907F;
-    --shadow:0 18px 48px -20px rgba(120,80,40,.30);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    font-family:"Zen Kaku Gothic New",system-ui,sans-serif;
-    background:
-      radial-gradient(120% 80% at 12% -10%, #FBE3CD 0%, transparent 55%),
-      radial-gradient(110% 70% at 100% 0%, #FDEFDF 0%, transparent 50%),
-      var(--cream);
-    color:var(--ink);
-    line-height:1.75;
-    min-height:100%;
-    display:flex;
-    justify-content:center;
-    padding:28px 16px 60px;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{width:100%;max-width:660px}
-
-  /* ── ヘッダー（テスト本体と共通） ── */
-  .masthead{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px;padding:2px 2px 0}
-  .masthead .logo{height:46px;width:auto;display:block}
-  .wordmark{display:flex;flex-direction:column;justify-content:center;gap:3px}
-  .wordmark .wm-text{font-family:"Zen Maru Gothic";font-weight:700;font-size:18px;line-height:1.2;color:var(--ink);letter-spacing:.02em}
-  .wordmark .wm-sub{font-family:"Zen Kaku Gothic New";font-weight:400;font-size:11px;line-height:1.3;color:var(--ink);letter-spacing:.03em}
-  .masthead .pill{
-    margin-left:auto;font-size:11px;letter-spacing:.16em;color:var(--coral-dk);
-    background:#FDEAD8;padding:6px 12px;border-radius:999px;font-weight:700;white-space:nowrap;
-  }
-  .sitefoot{text-align:center;margin-top:26px;font-size:11px;color:#9A8B7B;line-height:1.95}
-  .sitefoot .org{color:var(--ink-soft);font-weight:500}
-
-  /* ── カード（テスト本体と共通） ── */
-  .card{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:27px;
-    padding:36px 30px;
-    box-shadow:var(--shadow);
-    animation:rise .6s cubic-bezier(.2,.8,.2,1) both;
-  }
-  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-
-  .eyebrow{
-    display:inline-block;font-family:"Zen Maru Gothic";font-weight:700;color:#fff;
-    background:linear-gradient(135deg,var(--coral),#F7BC83);
-    font-size:12.5px;letter-spacing:.1em;margin-bottom:13px;
-    padding:5px 15px;border-radius:999px;box-shadow:0 7px 15px -7px var(--coral);
-  }
-  h1{
-    font-family:"Zen Maru Gothic";font-weight:900;
-    font-size:27px;line-height:1.35;letter-spacing:.01em;margin-bottom:14px;
-  }
-  .lead{color:var(--ink-soft);font-size:15px;margin-bottom:20px}
 
   /* ── 受講の流れ（細いストリップ） ── */
   .flow{
@@ -186,7 +136,7 @@
         </a>
       </li>
 
-      <!-- DAY 2〜4：準備中（公開時に下記コメントの手順で有効化） -->
+      <!-- DAY 2：準備中 -->
       <li>
         <div class="day is-soon" aria-disabled="true">
           <span class="day-num"><small>DAY</small>2</span>
@@ -196,7 +146,20 @@
           </span>
           <span class="soon-badge">準備中</span>
         </div>
+        <!-- ▼ DAY2 公開時：すぐ上の <div class="day is-soon"> から </div> までを削除し、
+             この囲みコメントを外して、タイトルと説明の 2 行だけ書き換えてください ▼
+        <a class="day is-open" href="day2.html">
+          <span class="day-num"><small>DAY</small>2</span>
+          <span class="day-body">
+            <span class="day-title">（この回のタイトル）</span>
+            <span class="day-desc">（内容の説明・全◯問）</span>
+          </span>
+          <span class="day-cta"><span class="label">テストを受ける</span> <span class="arrow">→</span></span>
+        </a>
+        -->
       </li>
+
+      <!-- DAY 3：準備中 -->
       <li>
         <div class="day is-soon" aria-disabled="true">
           <span class="day-num"><small>DAY</small>3</span>
@@ -206,7 +169,20 @@
           </span>
           <span class="soon-badge">準備中</span>
         </div>
+        <!-- ▼ DAY3 公開時：すぐ上の <div class="day is-soon"> から </div> までを削除し、
+             この囲みコメントを外して、タイトルと説明の 2 行だけ書き換えてください ▼
+        <a class="day is-open" href="day3.html">
+          <span class="day-num"><small>DAY</small>3</span>
+          <span class="day-body">
+            <span class="day-title">（この回のタイトル）</span>
+            <span class="day-desc">（内容の説明・全◯問）</span>
+          </span>
+          <span class="day-cta"><span class="label">テストを受ける</span> <span class="arrow">→</span></span>
+        </a>
+        -->
       </li>
+
+      <!-- DAY 4：準備中 -->
       <li>
         <div class="day is-soon" aria-disabled="true">
           <span class="day-num"><small>DAY</small>4</span>
@@ -216,6 +192,17 @@
           </span>
           <span class="soon-badge">準備中</span>
         </div>
+        <!-- ▼ DAY4 公開時：すぐ上の <div class="day is-soon"> から </div> までを削除し、
+             この囲みコメントを外して、タイトルと説明の 2 行だけ書き換えてください ▼
+        <a class="day is-open" href="day4.html">
+          <span class="day-num"><small>DAY</small>4</span>
+          <span class="day-body">
+            <span class="day-title">（この回のタイトル）</span>
+            <span class="day-desc">（内容の説明・全◯問）</span>
+          </span>
+          <span class="day-cta"><span class="label">テストを受ける</span> <span class="arrow">→</span></span>
+        </a>
+        -->
       </li>
     </ul>
 
@@ -231,14 +218,7 @@
   </div>
 </div>
 
-<!-- ============================================================
-     DAY2〜4 を公開するときの手順（このファイルの編集はこれだけ）
-     1. 該当の <li> 内を、DAY1 と同じ「is-open」リンク型に書き換える：
-        <a class="day is-open" href="day2.html"> ... </a>
-     2. day-title / day-desc を、その回の内容に変更
-     3. soon-badge の行を削除し、代わりに DAY1 と同じ
-        <span class="day-cta"><span class="label">テストを受ける</span> <span class="arrow">→</span></span>
-        を入れる
-     ============================================================ -->
+<!-- DAY2〜4 の公開手順：各 <li> 内のコメントどおり（差し替え用ブロックのコメントを外すだけ）。
+     あわせて dayX.html を day1.html の複製から作成してください（手順は README-setup.md）。 -->
 </body>
 </html>
