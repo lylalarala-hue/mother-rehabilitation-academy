@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>確認テスト｜産前産後リハビリアカデミー</title>
+<link rel="icon" type="image/png" href="assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
@@ -24,7 +25,8 @@ window.QUIZ = (function () {
 const CONFIG = {
   day:        "DAY 1",
   title:      "産前産後の基礎と評価",
-  passRatio:  1.0,          // 合格ライン（1.0 = 100%）
+  passRatio:  1.0,          // 合格ライン（1.0 = 100%。例：0.8 にすると8割正解で合格）
+  isSample:   true,         // true の間は開始画面に「サンプル問題」の注記を表示。本番問題に差し替えたら false に
   // ▼ Apps Script を公開した「ウェブアプリURL」をここに貼る（未設定なら記録はスキップ）
   endpoint:   "https://script.google.com/macros/s/AKfycbw92xxGrnPwqDltsANabnVT67SQQKvEK06SO_dwPIWTa8DFITuuUKDO2SA6ubbLFX0jOg/exec"
 };
