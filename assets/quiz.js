@@ -39,7 +39,7 @@ document.getElementById('app').innerHTML = `
     <div class="btn-row">
       <button class="btn btn-primary" id="startBtn" disabled>テストを始める</button>
     </div>
-    <p class="sample-note">＊ 現在は動作確認用のサンプル問題です（後日スライドから差し替えます）</p>
+    ${CONFIG.isSample ? '<p class="sample-note">＊ 現在は動作確認用のサンプル問題です（後日スライドから差し替えます）</p>' : ''}
   </div>
 
   <!-- ===== QUIZ ===== -->
@@ -85,6 +85,8 @@ document.getElementById('app').innerHTML = `
    ③ ロジック（基本的に編集不要）
    ============================================================ */
 const $ = id => document.getElementById(id);
+/* 氏名など利用者の入力をHTMLに埋め込むときの表示崩れ防止（記号をそのまま文字として表示） */
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const total = QUESTIONS.length;
 const passNeed = Math.ceil(total * CONFIG.passRatio);
 let cur = 0, picks = [], attempt = 0, userName = "";
@@ -165,14 +167,14 @@ function finish(){
     v.textContent = "合格"; v.className = "verdict pass";
     $("vsub").textContent = "お疲れさまでした。基準を満たしました。";
     b.className = "banner pass";
-    b.innerHTML = "<b>"+userName+" さん、合格です。</b><br>この内容の理解が確認できました。ハンズオン（対面実技）の準備が整っています。下記の解説で総復習しておきましょう。";
+    b.innerHTML = "<b>"+esc(userName)+" さん、合格です。</b><br>この内容の理解が確認できました。ハンズオン（対面実技）の準備が整っています。下記の解説で総復習しておきましょう。";
     $("retryBtn").classList.add("hide");
     $("homeBtn").className = "btn btn-primary";   // 合格：一覧へ戻るが主アクション
   }else{
     v.textContent = "もう少し"; v.className = "verdict fail";
     $("vsub").textContent = "合格まで あと " + (passNeed - correct) + " 問です。";
     b.className = "banner fail";
-    b.innerHTML = "<b>"+userName+" さん、惜しい！</b><br>下の解説でつまずいた箇所を確認し、もう一度挑戦してください。<b>回数制限はありません</b>。理解の定着が目的です。";
+    b.innerHTML = "<b>"+esc(userName)+" さん、惜しい！</b><br>下の解説でつまずいた箇所を確認し、もう一度挑戦してください。<b>回数制限はありません</b>。理解の定着が目的です。";
     $("retryBtn").classList.remove("hide");        // 不合格：再挑戦が主
     $("homeBtn").className = "btn btn-ghost";       // 一覧へ戻るは副
   }
@@ -223,8 +225,8 @@ function recordResult(correct, total, pct, pass, wrongList){
     headers:{ "Content-Type":"text/plain;charset=utf-8" },
     body: JSON.stringify(payload)
   }).then(()=>{
-    note.textContent = "結果を記録しました。";
+    note.textContent = "結果を送信しました。";
   }).catch(()=>{
-    note.textContent = "※ 記録の送信に失敗しました。通信環境をご確認のうえ、もう一度送信してください。";
+    note.textContent = "※ 結果を送信できませんでした。通信環境をご確認のうえ、お手数ですがもう一度受験をお願いします。";
   });
 }
