@@ -31,7 +31,7 @@ document.getElementById('app').innerHTML = `
       <li><span class="ic">問</span><span><b id="qnum"></b>問の選択式です（所要 約5〜8分）</span></li>
       <li><span class="ic">%</span><span>合格ラインは <b id="passLabel"></b>。<b>合格するまで何度でも</b>再受験できます</span></li>
       <li><span class="ic">解</span><span>回答後にすべての問題の<b>解説</b>が表示されます。復習に活用してください</span></li>
-      <li><span class="ic">注</span><span>各回に<b>リスク管理・禁忌</b>の設問が含まれます。実技前の安全確認として重要です</span></li>
+      ${CONFIG.riskNote === false ? '' : '<li><span class="ic">注</span><span>各回に<b>リスク管理・禁忌</b>の設問が含まれます。実技前の安全確認として重要です</span></li>'}
     </ul>
     <label class="fld" for="name">お名前（フルネーム）</label>
     <input type="text" id="name" placeholder="例）山田 花子" autocomplete="name" />
